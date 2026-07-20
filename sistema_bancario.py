@@ -69,17 +69,27 @@ class Cliente:
 class SistemaBancario:
     def __init__(self):
         self.base_sistema = {}
+        self.base_clientes = {}
 
     def agregar_cliente(self, cliente):
-        self.base_sistema[cliente.nombre] = cliente
+        self.base_clientes[cliente.nombre] = cliente
+
+    def buscar_cliente(self, nombre):
+        cliente = self.base_clientes.get(nombre)
+        if cliente:
+            return cliente
+        else:
+            raise ClienteNoEncontradoError("Cliente no encontrado")
 
     def buscar_cuenta(self, numero_cuenta):
         cuenta = self.base_sistema.get(numero_cuenta)
         if cuenta:
             return cuenta
-            
         else:
             raise CuentaNoEncontradaError("Cuenta no encontrada")
+
+class ClienteNoEncontradoError(Exception):
+    pass
 
 class CuentaNoEncontradaError(Exception):
     pass
