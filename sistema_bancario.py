@@ -54,6 +54,15 @@ class Cuenta:
     def consultar_historial(self):
         return self.historial_transacciones
 
+    def a_diccionario(self):
+        return {
+            "numero_cuenta": self.numero_cuenta,
+            "saldo": self.saldo,
+            "contrasena": self.contrasena,
+            "historial_transacciones": self.historial_transacciones,
+            "intentos_fallidos": self.intentos_fallidos
+        }
+
 class Cliente:
     def __init__(self, nombre):
         self.nombre = nombre
@@ -65,7 +74,6 @@ class Cliente:
     def consultar_cuentas(self):
         return self.cuentas
 
-
 class SistemaBancario:
     def __init__(self):
         self.base_sistema = {}
@@ -73,6 +81,10 @@ class SistemaBancario:
 
     def agregar_cliente(self, cliente):
         self.base_clientes[cliente.nombre] = cliente
+
+    def agregar_cuenta(self, cliente, cuenta):
+        self.base_sistema[cuenta.numero_cuenta] = cuenta
+        cliente.agregar_cuenta(cuenta)
 
     def buscar_cliente(self, nombre):
         cliente = self.base_clientes.get(nombre)
