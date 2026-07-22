@@ -1,5 +1,6 @@
 import time
 import datetime
+import json 
 
 # =====
 
@@ -131,6 +132,11 @@ class SistemaBancario:
             "clientes": clientes_convertidos,
             "cuentas": cuentas_convertidas
         }
+
+    def guardar_json(self, nombre_archivo="datos_banco.json"):
+        datos = self.a_diccionario()
+        with open(nombre_archivo, "w", encoding="utf-8") as archivo:
+            json.dump(datos, archivo, indent=4, ensure_ascii=False)
 
 class ClienteNoEncontradoError(Exception):
     pass
