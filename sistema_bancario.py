@@ -154,6 +154,9 @@ class SistemaBancario:
         with open(nombre_archivo, "w", encoding="utf-8") as archivo:
             json.dump(datos, archivo, indent=4, ensure_ascii=False)
 
+    @classmethod
+    def cargar_json(cls, nombre_archivo="datos_banco.json"):
+        pass
 class ClienteNoEncontradoError(Exception):
     pass
 
